@@ -1,0 +1,43 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: taskorg-db
+    restart: always
+    environment:
+      POSTGRES_USER: taskorg_user
+      POSTGRES_PASSWORD: taskorg_pass
+      POSTGRES_DB: taskorg_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  server:
+    build: ./server
+    container_name: taskorg-server
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgres://taskorg_user:taskorg_pass@db:5432/taskorg_db
+      JWT_SECRET: super_secret_key_2024
+    volumes:
+      - ./server/src:/app/src          # Código local sincronizado
+    command: npm run dev
+    depends_on:
+      - db
+
+  client:
+    build: ./client
+    container_name: taskorg-client
+    restart: always
+    ports:
+      - "5173:5173"                    # Porta do Vite
+    volumes:
+      - ./client/src:/app/src          # Código local sincronizado
+    command: npm run dev
+    depends_on:
+      - server
+
+volumes:
+  pgdata:
