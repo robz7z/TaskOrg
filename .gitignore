@@ -1,0 +1,25 @@
+# Node.js
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Ambiente e variáveis
+.env
+.env.local
+.env.*.local
+
+# Docker (volumes locais, se houver)
+pgdata/
+
+# IDE e sistema
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Builds e dist
+dist/
+build/
+*.log
