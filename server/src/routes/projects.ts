@@ -6,10 +6,11 @@ import { eq, and } from 'drizzle-orm'
 interface AuthRequest extends FastifyRequest {
   user?: { id: number, email: string }
 }
-export async function projectRoutes(fastify: FastifyInstance) {
+
+export async function projectRoutes(app: FastifyInstance) {
   
   // GET /projects – só os do usuário
-  fastify.get('/projects', async (request: AuthRequest, reply: FastifyReply) => {
+  app.get('/projects', async (request: AuthRequest, reply: FastifyReply) => {
     try {
       const userId = request.user?.id
       if (!userId) {
@@ -27,8 +28,7 @@ export async function projectRoutes(fastify: FastifyInstance) {
     }
   })
 
-
-  fastify.get('/projects/:id', async (request: AuthRequest, reply: FastifyReply) => {
+  app.get('/projects/:id', async (request: AuthRequest, reply: FastifyReply) => {
     try {
       const { id } = request.params as { id: string }
       const userId = request.user?.id
@@ -56,7 +56,7 @@ export async function projectRoutes(fastify: FastifyInstance) {
   })
 
   // POST /projects – cria com userId do token
-  fastify.post('/projects', async (request: AuthRequest, reply: FastifyReply) => {
+  app.post('/projects', async (request: AuthRequest, reply: FastifyReply) => {
     try {
       const { name } = request.body as { name: string }
       const userId = request.user?.id
@@ -79,7 +79,7 @@ export async function projectRoutes(fastify: FastifyInstance) {
   })
 
   // PUT /projects/:id – só se for do usuário
-  fastify.put('/projects/:id', async (request: AuthRequest, reply: FastifyReply) => {
+  app.put('/projects/:id', async (request: AuthRequest, reply: FastifyReply) => {
     try {
       const { id } = request.params as { id: string }
       const { name } = request.body as { name: string }
@@ -118,7 +118,7 @@ export async function projectRoutes(fastify: FastifyInstance) {
   })
 
   // DELETE /projects/:id – só se for do usuário
-  fastify.delete('/projects/:id', async (request: AuthRequest, reply: FastifyReply) => {
+  app.delete('/projects/:id', async (request: AuthRequest, reply: FastifyReply) => {
     try {
       const { id } = request.params as { id: string }
       const userId = request.user?.id
