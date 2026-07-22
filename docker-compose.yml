@@ -22,7 +22,7 @@ services:
       DATABASE_URL: postgres://taskorg_user:taskorg_pass@db:5432/taskorg_db
       JWT_SECRET: super_secret_key_2026
     volumes:
-      - ./server:/app
+      - ./server/src:/app/src
       - /app/node_modules
     command: npm run dev
     depends_on:
@@ -35,7 +35,7 @@ services:
     ports:
       - "5173:5173"
     volumes:
-      - ./client:/app
+      - ./client/src:/app/src
       - /app/node_modules
     command: npm run dev -- --host
     depends_on:
