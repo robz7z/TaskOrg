@@ -2,11 +2,13 @@ import Fastify from 'fastify';
 import cors from '@fastify/cors';
 import { authRoutes } from './routes/auth';
 import { authMiddleware } from './middleware/auth';
+import { projectRoutes } from './routes/projects';
 
 const app = Fastify()
 
 app.register(cors, { origin: 'http://localhost:5173' })
 app.register(authRoutes, { prefix: '/api' })
+app.register(projectRoutes, { prefix: '/api' })
 
 authMiddleware(app)
 
