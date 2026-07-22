@@ -7,10 +7,12 @@ import { projectRoutes } from './routes/projects';
 const app = Fastify()
 
 app.register(cors, { origin: 'http://localhost:5173' })
+
+authMiddleware(app)
+
 app.register(authRoutes, { prefix: '/api' })
 app.register(projectRoutes, { prefix: '/api' })
 
-authMiddleware(app)
 
 app.listen({ 
   port: Number(process.env.PORT) || 3035,
