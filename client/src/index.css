@@ -1,1 +1,25 @@
-@import "tailwindcss"
+@import "tailwindcss";
+
+/* TEMA ESCURO (PADRÃO) */
+@theme {
+  --color-primary: #58A6FF;
+  --color-secondary: #DDC39C;
+  --color-tertiary: #DA9600;
+  --color-neutral: #74777E;
+
+  --color-background: #0D1117;
+  --color-surface: #161B22;
+  --color-foreground: #F0F6FC;
+  --color-border: #30363D;
+
+  --font-family-sans: 'Inter', sans-serif;
+}
+
+/* ESTILOS GLOBAIS */
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-family-sans);
+  margin: 0;
+  min-height: 100vh;
+}
