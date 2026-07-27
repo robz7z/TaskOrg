@@ -1,8 +1,9 @@
-import Fastify from 'fastify';
-import cors from '@fastify/cors';
-import { authRoutes } from './routes/auth';
-import { authMiddleware } from './middleware/auth';
-import { projectRoutes } from './routes/projects';
+import Fastify from 'fastify'
+import cors from '@fastify/cors'
+import { authRoutes } from './routes/auth'
+import { authMiddleware } from './middleware/auth'
+import { projectRoutes } from './routes/projects'
+import { taskRoutes } from './routes/tasks'
 
 const app = Fastify()
 
@@ -12,7 +13,7 @@ authMiddleware(app)
 
 app.register(authRoutes, { prefix: '/api' })
 app.register(projectRoutes, { prefix: '/api' })
-
+app.register(taskRoutes, { prefix: '/api' })
 
 app.listen({ 
   port: Number(process.env.PORT) || 3035,
