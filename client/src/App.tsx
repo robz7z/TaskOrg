@@ -2,10 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider } from './contexts/AuthContext'
 import { ProtectedRoute } from './components/ProtectedRoute'
 import { Login } from './pages/Login'
-
-function ProjectsPage() {
-  return <div className="p-6 text-foreground">Lista de Projetos (em breve)</div>
-}
+import { Dashboard } from './pages/Dashboard'
 
 function App() {
   return (
@@ -14,10 +11,10 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route
-            path="/projects"
+            path="/dashboard"
             element={
               <ProtectedRoute>
-                <ProjectsPage />
+                <Dashboard />
               </ProtectedRoute>
             }
           />

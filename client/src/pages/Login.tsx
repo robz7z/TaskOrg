@@ -31,7 +31,7 @@ export function Login() {
       } else {
         await login(email, password)
       }
-      navigate('/projects')
+      navigate('/dashboard')
     } catch (err: any) {
       setError(err.message || 'Erro ao autenticar')
     } finally {
@@ -66,14 +66,14 @@ export function Login() {
         <div className="pt-8 px-8 pb-4 text-center">
           <div className="mx-auto w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center mb-6 shadow-inner">
             <span className="material-symbols-outlined text-primary text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>
-              dataset
+              TaskOrg
             </span>
           </div>
           <h1 className="text-2xl font-bold text-foreground mb-2 tracking-tight">
             {isRegister ? 'Crie sua conta' : 'Bem-vindo de Volta'}
           </h1>
           <p className="text-neutral text-sm">
-            {isRegister ? 'Preencha os dados para começar.' : 'Entre para acessar seus projetos.'}
+            {isRegister ? 'Preencha os dados para começar.' : 'Entre para acessar seu dashboard.'}
           </p>
         </div>
 
@@ -100,7 +100,7 @@ export function Login() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="voce@email.com"
+              placeholder="seu@email.com"
               required
               error={error}
             />
@@ -114,7 +114,7 @@ export function Login() {
                 type={showPassword ? 'text' : 'password'}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Digite sua senha"
+                placeholder="digite sua senha"
                 required
               />
               <button
@@ -128,16 +128,12 @@ export function Login() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-primary text-on-primary font-semibold uppercase tracking-wide py-3 rounded-lg shadow-md hover:bg-primary/90 hover:shadow-lg transition-all mt-2 flex items-center justify-center gap-2 group relative overflow-hidden"
+              className="w-full bg-primary text-on-primary font-semibold uppercase tracking-wide py-3 rounded-lg shadow-md hover:bg-primary/90 hover:shadow-lg cursor-pointer transition-all mt-2 flex items-center justify-center gap-2 group relative overflow-hidden"
             >
               <span className="relative z-10">
                 {loading ? 'Carregando...' : isRegister ? 'Criar conta' : 'Entrar'}
               </span>
-              {!loading && (
-                <span className="material-symbols-outlined relative z-10 text-sm group-hover:translate-x-1 transition-transform">
-                  arrow_forward
-                </span>
-              )}
+              {!loading}
               <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
             </button>
           </form>
@@ -168,7 +164,7 @@ export function Login() {
             <button
               type="button"
               onClick={toggleRegister}
-              className="text-primary font-semibold ml-1 hover:underline transition"
+              className="text-primary font-semibold ml-1 hover:underline transition cursor-pointer"
             >
               {isRegister ? 'Faça login' : 'Registre-se'}
             </button>
