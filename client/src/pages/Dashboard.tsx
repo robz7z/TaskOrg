@@ -8,7 +8,7 @@ import {
 } from 'lucide-react'
 import { useDashboardData } from '../hooks/useDashboardData'
 import { getDashboardMetrics } from '../utils/dashboardHelpers'
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
+import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer } from 'recharts'
 
 export function Dashboard() {
   const { projects, tasks, loading, error } = useDashboardData()
