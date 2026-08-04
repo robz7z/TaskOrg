@@ -3,6 +3,19 @@ import { eq, and } from 'drizzle-orm'
 import { db } from '../db'
 import { tasks, projects } from '../db/schema'
 
+// ============================================================
+//  STATUS VÁLIDOS
+// ============================================================
+const VALID_STATUSES = ['pending', 'in_progress', 'done'] as const
+type TaskStatus = typeof VALID_STATUSES[number]
+
+function isValidStatus(status: string): status is TaskStatus {
+  return VALID_STATUSES.includes(status as TaskStatus)
+}
+
+// ============================================================
+//  HELPERS DE AUTORIZAÇÃO
+// ============================================================
 async function getOwnedProject(projectId: number, userId: number) {
   const [project] = await db
     .select()
@@ -22,26 +35,32 @@ async function getOwnedTask(taskId: number, userId: number) {
   return result
 }
 
+// ============================================================
+//  ROTAS
+// ============================================================
 export async function taskRoutes(app: FastifyInstance) {
+  
+  // GET /projects/:projectId/tasks
   app.get(
     '/projects/:projectId/tasks',
     async (request: FastifyRequest, reply: FastifyReply) => {
       try {
         const userId = request.user?.id
-
-        if (!userId) 
+        if (!userId) {
           return reply.status(401).send({ error: 'Usuário não autenticado' })
+        }
 
         const { projectId } = request.params as { projectId: string }
         const numericProjectId = Number(projectId)
 
-        if (Number.isNaN(numericProjectId)) 
+        if (Number.isNaN(numericProjectId)) {
           return reply.status(400).send({ error: 'projectId inválido' })
+        }
 
         const project = await getOwnedProject(numericProjectId, userId)
-
-        if (!project) 
+        if (!project) {
           return reply.status(404).send({ error: 'Projeto não encontrado' })
+        }
 
         const projectTasks = await db
           .select()
@@ -56,20 +75,21 @@ export async function taskRoutes(app: FastifyInstance) {
     }
   )
 
+  // POST /projects/:projectId/tasks
   app.post(
     '/projects/:projectId/tasks',
     async (request: FastifyRequest, reply: FastifyReply) => {
       try {
         const userId = request.user?.id
-        
-        if (!userId) 
+        if (!userId) {
           return reply.status(401).send({ error: 'Usuário não autenticado' })
+        }
 
         const { projectId } = request.params as { projectId: string }
         const numericProjectId = Number(projectId)
-        
-        if (Number.isNaN(numericProjectId)) 
+        if (Number.isNaN(numericProjectId)) {
           return reply.status(400).send({ error: 'projectId inválido' })
+        }
 
         const { title, description, status } = (request.body || {}) as {
           title?: string
@@ -81,14 +101,26 @@ export async function taskRoutes(app: FastifyInstance) {
           return reply.status(400).send({ error: 'O campo title é obrigatório' })
         }
 
+        // ✅ VALIDAÇÃO DO STATUS (se enviado)
+        if (status !== undefined && !isValidStatus(status)) {
+          return reply.status(400).send({
+            error: 'Status inválido. Use: pending, in_progress ou done'
+          })
+        }
+
         const project = await getOwnedProject(numericProjectId, userId)
-        
-        if (!project) 
+        if (!project) {
           return reply.status(404).send({ error: 'Projeto não encontrado' })
+        }
 
         const [newTask] = await db
           .insert(tasks)
-          .values({ title, description, status: status ?? 'pending', projectId: numericProjectId })
+          .values({
+            title,
+            description,
+            status: status ?? 'pending',
+            projectId: numericProjectId
+          })
           .returning()
 
         return reply.status(201).send(newTask)
@@ -99,20 +131,21 @@ export async function taskRoutes(app: FastifyInstance) {
     }
   )
 
+  // PUT /tasks/:id
   app.put(
     '/tasks/:id',
     async (request: FastifyRequest, reply: FastifyReply) => {
       try {
         const userId = request.user?.id
-        
-        if (!userId) 
+        if (!userId) {
           return reply.status(401).send({ error: 'Usuário não autenticado' })
+        }
 
         const { id } = request.params as { id: string }
         const numericTaskId = Number(id)
-        
-        if (Number.isNaN(numericTaskId)) 
+        if (Number.isNaN(numericTaskId)) {
           return reply.status(400).send({ error: 'id inválido' })
+        }
 
         const { title, description, status } = (request.body || {}) as {
           title?: string
@@ -121,12 +154,19 @@ export async function taskRoutes(app: FastifyInstance) {
         }
 
         const owned = await getOwnedTask(numericTaskId, userId)
-        
-        if (!owned) 
+        if (!owned) {
           return reply.status(404).send({ error: 'Tarefa não encontrada' })
+        }
 
         if (title !== undefined && title.trim() === '') {
           return reply.status(400).send({ error: 'O campo title não pode ser vazio' })
+        }
+
+        // ✅ VALIDAÇÃO DO STATUS (se enviado)
+        if (status !== undefined && !isValidStatus(status)) {
+          return reply.status(400).send({
+            error: 'Status inválido. Use: pending, in_progress ou done'
+          })
         }
 
         const [updatedTask] = await db
@@ -147,28 +187,28 @@ export async function taskRoutes(app: FastifyInstance) {
     }
   )
 
+  // DELETE /tasks/:id
   app.delete(
     '/tasks/:id',
     async (request: FastifyRequest, reply: FastifyReply) => {
       try {
         const userId = request.user?.id
-        
-        if (!userId) 
+        if (!userId) {
           return reply.status(401).send({ error: 'Usuário não autenticado' })
+        }
 
         const { id } = request.params as { id: string }
         const numericTaskId = Number(id)
-        
-        if (Number.isNaN(numericTaskId)) 
+        if (Number.isNaN(numericTaskId)) {
           return reply.status(400).send({ error: 'id inválido' })
+        }
 
         const owned = await getOwnedTask(numericTaskId, userId)
-        
-        if (!owned) 
+        if (!owned) {
           return reply.status(404).send({ error: 'Tarefa não encontrada' })
+        }
 
-        await db.delete(tasks)
-        .where(eq(tasks.id, numericTaskId))
+        await db.delete(tasks).where(eq(tasks.id, numericTaskId))
         
         return reply.status(204).send()
       

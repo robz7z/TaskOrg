@@ -4,7 +4,6 @@ import {
   CheckSquare,
   Clock,
   CheckCircle,
-  AlertTriangle,
   ArrowRight
 } from 'lucide-react'
 import { useDashboardData } from '../hooks/useDashboardData'
@@ -85,7 +84,7 @@ export function Dashboard() {
             <div className="flex items-center justify-between z-10">
               <span className="text-[10px] md:text-xs text-neutral uppercase tracking-wider">Concluídas</span>
               <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-green/20 flex items-center justify-center">
-                <CheckCircle className="w-4 h-4 md:w-5 md:h-5 text-green" />
+                <CheckCircle className="w-4 h-4 md:w-5 md:h-5 text-green-500" />
               </div>
             </div>
             <span className="text-xl md:text-3xl font-bold text-foreground z-10">{metrics.doneTasks}</span>
@@ -135,23 +134,36 @@ export function Dashboard() {
           <div className="lg:col-span-2 bg-surface p-4 md:p-6 rounded-xl shadow-md flex flex-col">
             <h2 className="text-base md:text-lg font-semibold text-foreground mb-4 flex justify-between items-center">
               Distribuição de Tarefas
-              <span className="text-[10px] md:text-xs bg-surface-container px-2 py-1 rounded-md text-neutral">Status</span>
             </h2>
-            <div className="w-full h-48">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={taskDistribution}>
-                  <XAxis dataKey="name" stroke="#74777E" fontSize={12} />
-                  <YAxis stroke="#74777E" fontSize={12} />
-                  <Tooltip
-                    contentStyle={{ backgroundColor: '#161B22', borderColor: '#30363D', color: '#F0F6FC' }}
-                    labelStyle={{ color: '#F0F6FC' }}
-                  />
-                  <Bar dataKey="value" fill="#58A6FF" radius={[4, 4, 0, 0]} />
-                </BarChart>
-              </ResponsiveContainer>
+            <div className="w-full h-64 flex-1">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart
+                    data={taskDistribution}
+                    layout="horizontal"
+                    margin={{ top: 10, right: 30, left: -10, bottom: 10 }}
+                  >
+                    <XAxis
+                      dataKey="name"
+                      stroke="#74777E"
+                      fontSize={12}
+                      tickLine={false}
+                      axisLine={{ stroke: '#30363D' }}
+                    />
+                    <YAxis
+                      type="number"
+                      fontSize={12}
+                      domain={[0, 'dataMax + 1']}
+                      allowDecimals={false}
+                      tickLine={false}
+                      axisLine={{ stroke: '#30363D' }}
+                      width={40}
+                    />
+                    <Bar dataKey="value" fill="#58A6FF" radius={[0, 4, 4, 0]} barSize={40} name="Tarefas" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
             </div>
           </div>
-        </div>
 
         {/* Top 3 projetos */}
         <div className="bg-surface rounded-xl shadow-md p-4 md:p-6 flex flex-col gap-4">
