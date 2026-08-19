@@ -7,10 +7,19 @@ export interface Project {
   createdAt: string
 }
 
+export interface CreateProjectPayload {
+  name: string
+}
+
 export const projectService = {
   // busca todos os projetos do usuário
   async getAll(): Promise<Project[]> {
     const { data } = await api.get<Project[]>('/projects')
+    return data
+  },
+
+  async create(payload: CreateProjectPayload): Promise<Project> {
+    const { data } = await api.post<Project>('/projects', payload)
     return data
   },
 }
