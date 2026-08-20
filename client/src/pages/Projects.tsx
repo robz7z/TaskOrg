@@ -59,7 +59,6 @@ export function Projects() {
   }, [])
 
   const totalProjects = projects.length
-  const totalTasks = tasks.length
   const pendingTasks = tasks.filter((t) => t.status === 'pending').length
   const inProgressTasks = tasks.filter((t) => t.status === 'in_progress').length
   const doneTasks = tasks.filter((t) => t.status === 'done').length

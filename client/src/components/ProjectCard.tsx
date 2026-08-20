@@ -35,7 +35,7 @@ export function ProjectCard({
   return (
     <div className="group relative bg-surface rounded-xl p-5 shadow-md shadow-surface/20 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 flex flex-col overflow-hidden">
       {/* Gradiente sutil no hover */}
-      <div className={`absolute inset-0 bg-gradient-to-br from-${config.color}/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`} />
+      <div className={`absolute inset-0 bg-linear-to-br from-${config.color}/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`} />
 
       {/* Bolha decorativa */}
       <div className={`absolute -top-16 -right-16 w-48 h-48 rounded-full bg-${config.color}/5 blur-2xl pointer-events-none group-hover:scale-110 transition-transform duration-700`} />
