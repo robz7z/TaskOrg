@@ -198,10 +198,8 @@ export function Dashboard() {
               return (
                 <div key={project.id} className="bg-surface-container/50 rounded-lg p-3 md:p-0 md:bg-transparent hover:bg-surface-variant/30 transition md:grid md:grid-cols-12 md:gap-4 md:px-3 md:py-3 md:items-center">
                   <div className="flex items-center gap-3 md:col-span-5">
-                    <div className="w-10 h-10 rounded bg-primary/20 shrink-0"></div>
                     <div>
                       <span className="text-sm font-medium text-foreground">{project.name}</span>
-                      <span className="block text-xs text-neutral truncate">ID: {project.id}</span>
                     </div>
                   </div>
                   <div className="md:col-span-3 mt-1 md:mt-0">
