@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import { Layout } from '../components/Layout'
 import {
   Folder,
@@ -12,6 +13,7 @@ import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer } from 'recharts'
 
 export function Dashboard() {
   const { projects, tasks, loading, error } = useDashboardData()
+  const navigate = useNavigate()
 
   if (loading) {
     return (
@@ -172,7 +174,9 @@ export function Dashboard() {
               <span className="text-[10px] md:text-xs text-primary uppercase tracking-widest">Operações Ativas</span>
               <h2 className="text-base md:text-xl font-semibold text-foreground">Principais Projetos por Volume</h2>
             </div>
-            <button className="text-xs md:text-sm text-foreground border border-border px-2 py-1 md:px-3 md:py-1 rounded-lg hover:bg-surface-variant transition flex items-center gap-1">
+            <button 
+            onClick={() => navigate('/projects')}
+            className="cursor-pointer text-xs md:text-sm text-foreground border border-border px-2 py-1 md:px-3 md:py-1 rounded-lg hover:bg-surface-variant transition flex items-center gap-1">
               Ver Tudo
               <ArrowRight className="w-4 h-4" />
             </button>
@@ -192,7 +196,7 @@ export function Dashboard() {
               const progress = projectTasks.length > 0 ? Math.round((done / projectTasks.length) * 100) : 0
 
               return (
-                <div key={project.id} className="bg-surface-container/50 rounded-lg p-3 md:p-0 md:bg-transparent hover:bg-surface-variant/30 transition cursor-pointer md:grid md:grid-cols-12 md:gap-4 md:px-3 md:py-3 md:items-center">
+                <div key={project.id} className="bg-surface-container/50 rounded-lg p-3 md:p-0 md:bg-transparent hover:bg-surface-variant/30 transition md:grid md:grid-cols-12 md:gap-4 md:px-3 md:py-3 md:items-center">
                   <div className="flex items-center gap-3 md:col-span-5">
                     <div className="w-10 h-10 rounded bg-primary/20 shrink-0"></div>
                     <div>

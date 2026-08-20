@@ -64,7 +64,7 @@ export function Layout({ children }: LayoutProps) {
           <div className="p-3 border-t border-border">
             <button
               onClick={handleLogout}
-              className="flex items-center w-full px-3 py-2 rounded-lg text-error hover:bg-error-container hover:text-on-error-container transition"
+              className="flex items-center w-full px-3 py-2 rounded-lg text-error cursor-pointer hover:bg-error-container hover:text-on-error-container transition"
             >
               <LogOut className="w-5 h-5 mr-2" />
               Sair
