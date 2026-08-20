@@ -131,9 +131,9 @@ export function Projects() {
         {/* Métricas */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <MetricsCard icon={FolderOpen} label="Total de Projetos" value={totalProjects} color="primary" />
-          <MetricsCard icon={Clock} label="Em Andamento" value={inProgressTasks} color="tertiary" />
-          <MetricsCard icon={CheckCircle2} label="Concluídos" value={doneTasks} color="secondary" />
           <MetricsCard icon={AlertTriangle} label="Pendentes" value={pendingTasks} color="error" />
+          <MetricsCard icon={Clock} label="Em Andamento" value={inProgressTasks} color="tertiary" />
+          <MetricsCard icon={CheckCircle2} label="Concluídos" value={doneTasks} color="success" />
         </div>
 
         {/* Grid de projetos */}

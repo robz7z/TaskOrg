@@ -5,7 +5,7 @@ interface MetricsCardProps {
   icon: LucideIcon
   label: string
   value: number
-  color: 'primary' | 'secondary' | 'tertiary' | 'error'
+  color: 'primary' | 'secondary' | 'tertiary' | 'error' | 'success'
 }
 
 const colorMap = {
@@ -28,6 +28,11 @@ const colorMap = {
     bg: 'bg-error/10',
     text: 'text-error',
     border: 'bg-error',
+  },
+    success: {                                 // <-- NOVO
+    bg: 'bg-green-500/10',
+    text: 'text-green-500',
+    border: 'bg-green-500',
   },
 }
 
