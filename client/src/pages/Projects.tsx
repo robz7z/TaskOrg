@@ -5,6 +5,7 @@ import { Layout } from '../components/Layout'
 import { MetricsCard } from '../components/MetricsCard'
 import { ProjectCard } from '../components/ProjectCard'
 import { CreateProjectModal } from '../components/CreateProjectModal'
+import { EditProjectModal } from '../components/EditProjectModal'
 import { projectService, type Project } from '../services/projectService'
 import { taskService, type Task } from '../services/taskService'
 import {
@@ -36,6 +37,7 @@ export function Projects() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [editingProject, setEditingProject] = useState<Project | null>(null)
   const navigate = useNavigate()
 
   const loadData = async () => {
@@ -51,6 +53,17 @@ export function Projects() {
       setError('Erro ao carregar projetos. Tente novamente.')
     } finally {
       setLoading(false)
+    }
+  }
+
+  const handleDeleteProject = async (project: Project) => {
+  if (!window.confirm(`Tem certeza que deseja excluir o projeto "${project.name}"?`)) return
+  try {
+    await projectService.delete(project.id)
+    await loadData()
+    // se tiver toast, adicione
+    } catch {
+      setError('Erro ao excluir projeto')
     }
   }
 
@@ -156,6 +169,8 @@ export function Projects() {
                 doneTasks={project.doneTasks}
                 icon={project.icon}
                 onViewTasks={() => navigate(`/projects/${project.id}`)}
+                onEdit={() => setEditingProject(project)}       // <-- adicione esta
+                onDelete={() => handleDeleteProject(project)}   // <-- adicione esta
               />
             ))}
           </div>
@@ -167,6 +182,15 @@ export function Projects() {
         onClose={() => setIsModalOpen(false)}
         onSuccess={loadData}
       />
+      {/* Modal de edição */}
+      {editingProject && (
+        <EditProjectModal
+          isOpen={!!editingProject}
+          onClose={() => setEditingProject(null)}
+          project={editingProject}
+          onSuccess={loadData}
+        />
+      )}
     </Layout>
   )
 }

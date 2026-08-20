@@ -1,6 +1,6 @@
 // src/components/projects/ProjectCard.tsx
-import type { LucideIcon } from 'lucide-react'
-import { ArrowRight } from 'lucide-react'
+import type { LucideIcon,  } from 'lucide-react'
+import { ArrowRight, Pencil, Trash2 } from 'lucide-react'
 
 type Status = 'Em Andamento' | 'Concluído' | 'Atrasado' | 'Planejado'
 
@@ -19,6 +19,8 @@ interface ProjectCardProps {
   doneTasks: number
   icon: LucideIcon
   onViewTasks: () => void
+  onEdit: () => void
+  onDelete: () => void
 }
 
 export function ProjectCard({
@@ -29,6 +31,8 @@ export function ProjectCard({
   doneTasks,
   icon: Icon,
   onViewTasks,
+  onEdit,
+  onDelete,
 }: ProjectCardProps) {
   const config = statusConfig[status] || statusConfig['Planejado']
 
@@ -41,15 +45,32 @@ export function ProjectCard({
       <div className={`absolute -top-16 -right-16 w-48 h-48 rounded-full bg-${config.color}/5 blur-2xl pointer-events-none group-hover:scale-110 transition-transform duration-700`} />
 
       <div className="relative z-10 flex flex-col flex-1">
-        <div className="flex justify-between items-start mb-3">
-          <div className="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center shadow-sm">
-            <Icon className={`w-5 h-5 text-${config.color}`} />
-          </div>
+      <div className="flex justify-between items-start mb-3">
+        <div className="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center shadow-sm">
+          <Icon className={`w-5 h-5 text-${config.color}`} />
+        </div>
+
+        <div className="flex items-center gap-1">   {/* gap-1 (mais próximo) */}
           <span className={`${config.bg} text-${config.color} px-2.5 py-1 rounded-full text-xs font-semibold flex items-center gap-1.5`}>
             <span className={`w-1.5 h-1.5 rounded-full bg-${config.color} animate-pulse`} />
             {status}
           </span>
+          <button
+            onClick={(e) => { e.stopPropagation(); onEdit() }}
+            className="cursor-pointer p-0.5 rounded-lg hover:bg-surface-container transition text-on-surface-variant hover:text-on-surface"
+            title="Editar projeto"
+          >
+            <Pencil className="w-4 h-4" />
+          </button>
+          <button
+            onClick={(e) => { e.stopPropagation(); onDelete() }}
+            className="cursor-pointer p-0.5 rounded-lg hover:bg-error/10 transition text-on-surface-variant hover:text-error"
+            title="Excluir projeto"
+          >
+            <Trash2 className="w-4 h-4" />
+          </button>
         </div>
+      </div>
 
         <h3 className="text-lg font-semibold text-on-surface mb-1 line-clamp-1">
           {title}

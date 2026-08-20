@@ -1,8 +1,9 @@
 import { useEffect, useState, useCallback } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { ArrowLeft, Plus, Trash2, Loader2 } from 'lucide-react'
+import { ArrowLeft, Plus, Trash2, Loader2, Pencil } from 'lucide-react'
 import { Layout } from '../components/Layout'
 import { CreateTaskModal } from '../components/CreateTaskModal'
+import { EditTaskModal } from '../components/EditTaskModal'
 import { taskService, type Task } from '../services/taskService'
 import { projectService, type Project } from '../services/projectService'
 
@@ -37,6 +38,7 @@ export function ProjectDetail() {
   const [error, setError] = useState('')
   const [filter, setFilter] = useState<StatusFilter>('all')
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [editingTask, setEditingTask] = useState<Task | null>(null)
 
   const loadData = useCallback(async () => {
     if (!projectId) return
@@ -188,7 +190,13 @@ export function ProjectDetail() {
                   <option value="in_progress">Em Andamento</option>
                   <option value="done">Concluído</option>
                 </select>
-
+                <button
+                  onClick={() => setEditingTask(task)}
+                  className="cursor-pointer w-8 h-8 rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-variant transition"
+                  title="Editar tarefa"
+                >
+                  <Pencil className="w-4 h-4" />
+                </button>
                 <button
                   onClick={() => handleDelete(task)}
                   className="cursor-pointer w-8 h-8 rounded-lg flex items-center justify-center text-error hover:bg-error/10 transition"
@@ -208,6 +216,14 @@ export function ProjectDetail() {
         projects={project ? [project] : []}
         onSuccess={loadData}
       />
+      {editingTask && (
+      <EditTaskModal
+          isOpen={!!editingTask}
+          onClose={() => setEditingTask(null)}
+          task={editingTask}
+          onSuccess={loadData}
+        />
+      )}
       </Layout>
   )
 }

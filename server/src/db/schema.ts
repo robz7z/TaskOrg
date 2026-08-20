@@ -20,6 +20,6 @@ export const tasks = pgTable('tasks', {
   title: varchar('title', { length: 255 }).notNull(),
   description: varchar('description', { length: 1000 }),
   status: varchar('status', { length: 20 }).notNull().default('pending'),
-  projectId: integer('project_id').notNull().references(() => projects.id),
+  projectId: integer('project_id').notNull().references(() => projects.id, { onDelete: 'cascade' }),
   createdAt: timestamp('created_at').defaultNow(),
 })
