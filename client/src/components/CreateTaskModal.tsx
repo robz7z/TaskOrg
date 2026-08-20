@@ -149,7 +149,7 @@ export function CreateTaskModal({ isOpen, onClose, projects, onSuccess }: Create
             <button
               type="submit"
               disabled={loading}
-              className="px-4 py-2 rounded-lg bg-primary text-on-primary font-semibold hover:bg-primary/90 transition disabled:opacity-50 flex items-center gap-2"
+              className="cursor-pointer px-4 py-2 rounded-lg bg-primary text-on-primary font-semibold hover:bg-primary/90 transition disabled:opacity-50 flex items-center gap-2"
             >
               {loading ? (
                 <>
