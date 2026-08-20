@@ -109,7 +109,7 @@ export function ProjectDetail() {
           <div className="flex items-center gap-4">
             <button
               onClick={() => navigate('/dashboard')}
-              className="w-9 h-9 rounded-lg bg-surface-variant flex items-center justify-center hover:bg-surface-variant/70 transition"
+              className="cursor-pointer w-9 h-9 rounded-lg bg-surface-variant flex items-center justify-center hover:bg-surface-variant/70 transition"
             >
               <ArrowLeft className="w-5 h-5 text-foreground" />
             </button>
@@ -123,7 +123,7 @@ export function ProjectDetail() {
 
           <button
             onClick={() => setIsModalOpen(true)}
-            className="px-4 py-2 rounded-lg bg-primary text-on-primary font-semibold hover:bg-primary/90 transition flex items-center gap-2"
+            className="cursor-pointer px-4 py-2 rounded-lg bg-primary text-on-primary font-semibold hover:bg-primary/90 transition flex items-center gap-2"
           >
             <Plus className="w-4 h-4" />
             Nova Tarefa
@@ -135,7 +135,7 @@ export function ProjectDetail() {
             <button
               key={f.key}
               onClick={() => setFilter(f.key)}
-              className={`pb-3 text-sm font-medium transition border-b-2 -mb-px ${
+              className={` cursor-pointer pb-3 text-sm font-medium transition border-b-2 -mb-px ${
                 filter === f.key
                   ? 'text-primary border-primary'
                   : 'text-neutral border-transparent hover:text-foreground'
@@ -182,7 +182,7 @@ export function ProjectDetail() {
                 <select
                   value={task.status}
                   onChange={(e) => handleStatusChange(task, e.target.value as Task['status'])}
-                  className="bg-background border border-border rounded-lg px-2 py-1 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="bg-background border border-border rounded-lg px-2 py-1 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary cursor-pointer"
                 >
                   <option value="pending">Pendente</option>
                   <option value="in_progress">Em Andamento</option>
@@ -191,7 +191,7 @@ export function ProjectDetail() {
 
                 <button
                   onClick={() => handleDelete(task)}
-                  className="w-8 h-8 rounded-lg flex items-center justify-center text-error hover:bg-error/10 transition"
+                  className="cursor-pointer w-8 h-8 rounded-lg flex items-center justify-center text-error hover:bg-error/10 transition"
                   title="Excluir tarefa"
                 >
                   <Trash2 className="w-4 h-4" />

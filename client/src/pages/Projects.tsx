@@ -121,7 +121,7 @@ export function Projects() {
           </div>
           <button
             onClick={() => setIsModalOpen(true)}
-            className="bg-primary text-on-primary text-sm font-semibold px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-primary/90 transition shadow-sm"
+            className="bg-primary text-on-primary text-sm font-semibold px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-primary/90 transition shadow-sm cursor-pointer"
           >
             <Plus className="w-4 h-4" />
             Novo Projeto

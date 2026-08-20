@@ -69,7 +69,7 @@ export function ProjectCard({
 
           <button
             onClick={onViewTasks}
-            className="w-full py-2 rounded-xl bg-surface-container text-on-surface text-xs font-semibold hover:bg-primary/10 hover:text-primary transition-all duration-200 flex items-center justify-center gap-2 group/btn"
+            className="cursor-pointer w-full py-2 rounded-xl bg-surface-container text-on-surface text-xs font-semibold hover:bg-primary/10 hover:text-primary transition-all duration-200 flex items-center justify-center gap-2 group/btn"
           >
             Ver Tarefas
             <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover/btn:translate-x-1" />
