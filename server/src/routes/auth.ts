@@ -2,7 +2,7 @@ import type { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify'
 import { eq } from 'drizzle-orm'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-import { db } from '../db'
+import { db } from '../db/index.js'
 import { users } from '../db/schema.js'
 
 const JWT_SECRET = process.env.JWT_SECRET || 'fallback_secret'

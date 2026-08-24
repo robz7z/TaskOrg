@@ -1,6 +1,6 @@
 import type { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify'
 import { eq, and } from 'drizzle-orm'
-import { db } from '../db'
+import { db } from '../db/index.js'
 import { tasks, projects } from '../db/schema.js'
 
 // ============================================================
