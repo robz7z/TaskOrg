@@ -1,5 +1,5 @@
-import type { Project } from '../services/projectService'
-import type { Task } from '../services/taskService'
+import type { Project } from '../services/projectService.js'
+import type { Task } from '../services/taskService.js'
 
 export function getDashboardMetrics(projects: Project[], tasks: Task[]) {
   const totalProjects = projects.length

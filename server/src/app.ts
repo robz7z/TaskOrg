@@ -1,9 +1,9 @@
 import Fastify from 'fastify'
 import cors from '@fastify/cors'
-import { authRoutes } from './routes/auth'
-import { authMiddleware } from './middleware/auth'
-import { projectRoutes } from './routes/projects'
-import { taskRoutes } from './routes/tasks'
+import { authRoutes } from './routes/auth.js'
+import { authMiddleware } from './middleware/auth.js'
+import { projectRoutes } from './routes/projects.js'
+import { taskRoutes } from './routes/tasks.js'
 
 const app = Fastify()
 

@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../contexts/AuthContext'
-import { Input } from '../components/Input'
+import { useAuth } from '../contexts/AuthContext.js'
+import { Input } from '../components/Input.js'
 
 export function Login() {
   const [email, setEmail] = useState('')

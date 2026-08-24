@@ -1,6 +1,6 @@
 import { useState, type SyntheticEvent } from 'react'
 import { X, Loader2 } from 'lucide-react'
-import { taskService, type Task } from '../services/taskService'
+import { taskService, type Task } from '../services/taskService.js'
 
 interface EditTaskModalProps {
   isOpen: boolean

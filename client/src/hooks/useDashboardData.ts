@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
-import { projectService } from '../services/projectService'
-import { taskService } from '../services/taskService'
-import type { Project } from '../services/projectService'
-import type { Task } from '../services/taskService'
+import { projectService } from '../services/projectService.js'
+import { taskService } from '../services/taskService.js'
+import type { Project } from '../services/projectService.js'
+import type { Task } from '../services/taskService.js'
 
 interface DashboardData {
   projects: Project[]

@@ -1,7 +1,7 @@
 import type { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify'
 import { eq, and } from 'drizzle-orm'
 import { db } from '../db'
-import { tasks, projects } from '../db/schema'
+import { tasks, projects } from '../db/schema.js'
 
 // ============================================================
 //  STATUS VÁLIDOS

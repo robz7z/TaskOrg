@@ -1,7 +1,7 @@
 // src/components/projects/CreateProjectModal.tsx
 import { useState, type SyntheticEvent } from 'react'
 import { X, Loader2 } from 'lucide-react'
-import { projectService } from '../services/projectService'
+import { projectService } from '../services/projectService.js'
 
 interface CreateProjectModalProps {
   isOpen: boolean

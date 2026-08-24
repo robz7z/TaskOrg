@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Layout } from '../components/Layout'
-import { MetricsCard } from '../components/MetricsCard'
-import { ProjectCard } from '../components/ProjectCard'
-import { CreateProjectModal } from '../components/CreateProjectModal'
-import { EditProjectModal } from '../components/EditProjectModal'
-import { projectService, type Project } from '../services/projectService'
-import { taskService, type Task } from '../services/taskService'
+import { Layout } from '../components/Layout.js'
+import { MetricsCard } from '../components/MetricsCard.js'
+import { ProjectCard } from '../components/ProjectCard.js'
+import { CreateProjectModal } from '../components/CreateProjectModal.js'
+import { EditProjectModal } from '../components/EditProjectModal.js'
+import { projectService, type Project } from '../services/projectService.js'
+import { taskService, type Task } from '../services/taskService.js'
 import {
   FolderOpen,
   Clock,

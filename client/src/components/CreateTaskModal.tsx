@@ -1,7 +1,7 @@
 import { useState, type SyntheticEvent } from 'react'
 import { X, Loader2 } from 'lucide-react'
-import { taskService } from '../services/taskService'
-import type { Project } from '../services/projectService'
+import { taskService } from '../services/taskService.js'
+import type { Project } from '../services/projectService.js'
 
 interface CreateTaskModalProps {
   isOpen: boolean

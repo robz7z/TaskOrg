@@ -1,6 +1,6 @@
 import { useState, type SyntheticEvent } from 'react'
 import { X, Loader2 } from 'lucide-react'
-import { projectService, type Project } from '../services/projectService'
+import { projectService, type Project } from '../services/projectService.js'
 
 interface EditProjectModalProps {
   isOpen: boolean

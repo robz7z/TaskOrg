@@ -1,5 +1,5 @@
 import { api } from './api'
-import type { LoginCredentials, RegisterCredentials, AuthResponse, User } from '../types/auth'
+import type { LoginCredentials, RegisterCredentials, AuthResponse, User } from '../types/auth.js'
 
 // Chaves centralizadas (boa prática)
 const STORAGE_KEYS = {

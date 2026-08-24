@@ -1,5 +1,5 @@
 import type { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify'
-import { db } from '../db/index'
+import { db } from '../db/index.js'
 import { projects } from '../db/schema'
 import { eq, and } from 'drizzle-orm'
 

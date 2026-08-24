@@ -1,11 +1,11 @@
 import { useEffect, useState, useCallback } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { ArrowLeft, Plus, Trash2, Loader2, Pencil } from 'lucide-react'
-import { Layout } from '../components/Layout'
-import { CreateTaskModal } from '../components/CreateTaskModal'
-import { EditTaskModal } from '../components/EditTaskModal'
-import { taskService, type Task } from '../services/taskService'
-import { projectService, type Project } from '../services/projectService'
+import { Layout } from '../components/Layout.js'
+import { CreateTaskModal } from '../components/CreateTaskModal.js'
+import { EditTaskModal } from '../components/EditTaskModal.js'
+import { taskService, type Task } from '../services/taskService.js'
+import { projectService, type Project } from '../services/projectService.js'
 
 type StatusFilter = 'all' | 'pending' | 'in_progress' | 'done'
 
