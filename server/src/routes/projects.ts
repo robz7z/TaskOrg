@@ -1,6 +1,6 @@
 import type { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify'
 import { db } from '../db/index.js'
-import { projects } from '../db/schema'
+import { projects } from '../db/schema.js'
 import { eq, and } from 'drizzle-orm'
 
 export async function projectRoutes(app: FastifyInstance) {
