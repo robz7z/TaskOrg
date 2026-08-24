@@ -8,7 +8,7 @@ import { taskRoutes } from './routes/tasks.js'
 const app = Fastify()
 
 app.register(cors, {
-  origin: 'http://localhost:5173',
+  origin: ['http://localhost:5173', 'https://taskorg.vercel.app'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
