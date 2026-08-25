@@ -1,12 +1,13 @@
 import { useEffect, useState, useCallback } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { ArrowLeft, Plus, Trash2, Loader2, Pencil } from 'lucide-react'
+import { ArrowLeft, Plus, Trash2, Pencil } from 'lucide-react'
 import { Layout } from '../components/Layout.js'
 import { CreateTaskModal } from '../components/CreateTaskModal.js'
 import { EditTaskModal } from '../components/EditTaskModal.js'
 import { taskService, type Task } from '../services/taskService.js'
 import { projectService, type Project } from '../services/projectService.js'
 import { toast } from 'sonner'
+import Skeleton from 'react-loading-skeleton'
 
 type StatusFilter = 'all' | 'pending' | 'in_progress' | 'done'
 
@@ -97,9 +98,24 @@ export function ProjectDetail() {
   if (loading) {
     return (
       <Layout>
-        <div className="flex items-center justify-center h-64 text-foreground">
-          <Loader2 className="w-5 h-5 animate-spin mr-2" />
-          Carregando...
+        <div className="flex flex-col gap-6">
+          <div className="flex items-center gap-4">
+            <Skeleton circle height={36} width={36} />
+            <div>
+              <Skeleton height={28} width={200} />
+              <Skeleton height={16} width={120} />
+            </div>
+          </div>
+          <div className="flex gap-6 border-b border-border pb-2">
+            {Array(4).fill(0).map((_, i) => (
+              <Skeleton key={i} height={24} width={60} />
+            ))}
+          </div>
+          <div className="flex flex-col gap-3">
+            {Array(5).fill(0).map((_, i) => (
+              <Skeleton key={i} height={80} />
+            ))}
+          </div>
         </div>
       </Layout>
     )
