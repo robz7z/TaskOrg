@@ -10,29 +10,14 @@ import {
 import { useDashboardData } from '../hooks/useDashboardData'
 import { getDashboardMetrics } from '../utils/dashboardHelpers'
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer } from 'recharts'
-import Skeleton from 'react-loading-skeleton'
+import { SkeletonDashboard } from '../components/Skeletons.js'
 
 export function Dashboard() {
   const { projects, tasks, loading, error } = useDashboardData()
   const navigate = useNavigate()
 
   if (loading) {
-    return (
-      <Layout>
-        <div className="flex flex-col gap-4">
-          <Skeleton height={40} width={200} />
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {Array(4).fill(0).map((_, i) => (
-              <Skeleton key={i} height={100} />
-            ))}
-          </div>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <Skeleton height={300} />
-            <Skeleton height={300} />
-          </div>
-        </div>
-      </Layout>
-    )
+    return <SkeletonDashboard />
   }
 
   if (error) {

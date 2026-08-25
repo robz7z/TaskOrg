@@ -7,7 +7,7 @@ import { CreateProjectModal } from '../components/CreateProjectModal.js'
 import { EditProjectModal } from '../components/EditProjectModal.js'
 import { projectService, type Project } from '../services/projectService.js'
 import { taskService, type Task } from '../services/taskService.js'
-import Skeleton from 'react-loading-skeleton'
+import { SkeletonProjects } from '../components/Skeletons.js'
 import {
   FolderOpen,
   Clock,
@@ -100,23 +100,7 @@ export function Projects() {
   })
 
   if (loading) {
-    return (
-      <Layout>
-        <div className="flex flex-col gap-6">
-          <Skeleton height={40} width={200} />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {Array(4).fill(0).map((_, i) => (
-              <Skeleton key={i} height={100} />
-            ))}
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            {Array(6).fill(0).map((_, i) => (
-              <Skeleton key={i} height={220} />
-            ))}
-          </div>
-        </div>
-      </Layout>
-    )
+    return <SkeletonProjects />
   }
 
   if (error) {
