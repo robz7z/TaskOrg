@@ -1,6 +1,7 @@
 import { useState, type SyntheticEvent } from 'react'
 import { X, Loader2 } from 'lucide-react'
 import { projectService, type Project } from '../services/projectService.js'
+import { toast } from 'sonner'
 
 interface EditProjectModalProps {
   isOpen: boolean
@@ -23,7 +24,7 @@ export function EditProjectModal({ isOpen, onClose, project, onSuccess }: EditPr
       onSuccess()
       handleClose()
     } catch (err: any) {
-      setError(err.response?.data?.error || 'Erro ao atualizar projeto')
+      toast.error(err.response?.data?.error || 'Erro ao atualizar projeto')
     } finally {
       setLoading(false)
     }

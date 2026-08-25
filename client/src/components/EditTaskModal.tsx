@@ -1,6 +1,7 @@
 import { useState, type SyntheticEvent } from 'react'
 import { X, Loader2 } from 'lucide-react'
 import { taskService, type Task } from '../services/taskService.js'
+import { toast } from 'sonner'
 
 interface EditTaskModalProps {
   isOpen: boolean
@@ -29,7 +30,7 @@ export function EditTaskModal({ isOpen, onClose, task, onSuccess }: EditTaskModa
       onSuccess()
       handleClose()
     } catch (err: any) {
-      setError(err.response?.data?.error || 'Erro ao atualizar tarefa')
+      toast.error(err.response?.data?.error || 'Erro ao atualizar tarefa')
     } finally {
       setLoading(false)
     }

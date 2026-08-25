@@ -5,10 +5,12 @@ import { Login } from './pages/Login.js'
 import { Dashboard } from './pages/Dashboard.js'
 import { ProjectDetail } from './pages/ProjectDetail.js'
 import { Projects } from './pages/Projects.js'
+import { Toaster } from 'sonner'
 
 function App() {
   return (
     <AuthProvider>
+      <Toaster position="bottom-right" theme="dark" richColors />
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />

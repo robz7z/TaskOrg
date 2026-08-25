@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext.js'
 import { Input } from '../components/Input.js'
+import { toast } from 'sonner'
 
 export function Login() {
   const [email, setEmail] = useState('')
@@ -33,7 +34,7 @@ export function Login() {
       }
       navigate('/dashboard')
     } catch (err: any) {
-      setError(err.message || 'Erro ao autenticar')
+      toast.error(err.message || 'Erro ao autenticar')
     } finally {
       setLoading(false)
     }

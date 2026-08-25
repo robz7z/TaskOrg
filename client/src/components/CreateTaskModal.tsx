@@ -2,6 +2,7 @@ import { useState, type SyntheticEvent } from 'react'
 import { X, Loader2 } from 'lucide-react'
 import { taskService } from '../services/taskService.js'
 import type { Project } from '../services/projectService.js'
+import { toast } from 'sonner'
 
 interface CreateTaskModalProps {
   isOpen: boolean
@@ -24,7 +25,7 @@ export function CreateTaskModal({ isOpen, onClose, projects, onSuccess }: Create
     setLoading(true)
 
     if (!projectId) {
-      setError('Selecione um projeto')
+      toast.error('Selecione um projeto')
       setLoading(false)
       return
     }
@@ -38,7 +39,7 @@ export function CreateTaskModal({ isOpen, onClose, projects, onSuccess }: Create
       onSuccess()
       handleClose()
     } catch (err: any) {
-      setError(err.response?.data?.error || 'Erro ao criar tarefa')
+      toast.error(err.response?.data?.error || 'Erro ao criar tarefa')
     } finally {
       setLoading(false)
     }

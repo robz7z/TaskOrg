@@ -6,6 +6,7 @@ import { CreateTaskModal } from '../components/CreateTaskModal.js'
 import { EditTaskModal } from '../components/EditTaskModal.js'
 import { taskService, type Task } from '../services/taskService.js'
 import { projectService, type Project } from '../services/projectService.js'
+import { toast } from 'sonner'
 
 type StatusFilter = 'all' | 'pending' | 'in_progress' | 'done'
 
@@ -68,7 +69,7 @@ export function ProjectDetail() {
       const updated = await taskService.update(task.id, { status: newStatus })
       setTasks((prev) => prev.map((t) => (t.id === task.id ? updated : t)))
     } catch {
-      setError('Erro ao atualizar o status da tarefa')
+      toast.error('Erro ao atualizar o status da tarefa')
     }
   }
 
@@ -80,7 +81,7 @@ export function ProjectDetail() {
       await taskService.delete(task.id)
       setTasks((prev) => prev.filter((t) => t.id !== task.id))
     } catch {
-      setError('Erro ao excluir a tarefa')
+      toast.error('Erro ao excluir a tarefa')
     }
   }
 

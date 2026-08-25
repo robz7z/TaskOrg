@@ -2,6 +2,8 @@
 import { useState, type SyntheticEvent } from 'react'
 import { X, Loader2 } from 'lucide-react'
 import { projectService } from '../services/projectService.js'
+import { toast } from 'sonner'
+
 
 interface CreateProjectModalProps {
   isOpen: boolean
@@ -24,7 +26,7 @@ export function CreateProjectModal({ isOpen, onClose, onSuccess }: CreateProject
       onSuccess()
       handleClose()
     } catch (err: any) {
-      setError(err.response?.data?.error || 'Erro ao criar projeto')
+      toast.error(err.response?.data?.error || 'Erro ao criar projeto')
     } finally {
       setLoading(false)
     }
