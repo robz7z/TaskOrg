@@ -21,8 +21,6 @@ export function useDashboardData(): DashboardData {
   const fetchData = async () => {
     setLoading(true)
     setError(null)
-
-    await new Promise(resolve => setTimeout(resolve, 5000))
     
     try {
       const projectsData = await projectService.getAll()
