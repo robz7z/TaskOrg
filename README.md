@@ -58,7 +58,3 @@
 - Neon (banco serverless)
 - Render (backend)
 - Vercel (frontend)
-
----
-
-## Estrutura do Projeto
